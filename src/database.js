@@ -1,7 +1,7 @@
 //Importar mongoose
 import mongoose from 'mongoose'
 
-//perimit que solo los campos definidos en el Schema sean almacenados
+//Permitir que solo los campos definidos en el Schema sean almacenados
 mongoose.set('strictQuery', true)
 
 //Crear una funcion llamada conection() servira para la conexion de la bd
