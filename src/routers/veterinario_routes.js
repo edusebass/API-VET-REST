@@ -13,13 +13,16 @@ import {
     nuevoPassword,
 } from "../controllers/veterinario_controller.js";
 import verificarAutenticacion from '../middlewares/autenticacion.js';
+import { validacionVeterinario } from '../middlewares/validacionVeterinario.js';
 //Crear una instancia de Router()
 const router = Router()
 
 //Definimos las rutas
 //rutas publicas
 router.post("/login", login);
-router.post("/registro", registro);
+
+router.post("/registro", validacionVeterinario, registro);
+
 router.get("/confirmar/:token", confirmEmail);
 router.get("/veterinarios", listarVeterinarios);
 router.get("/recuperar-password", recuperarPassword);
