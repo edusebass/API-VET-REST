@@ -1,12 +1,42 @@
 import mongoose from "mongoose"
 import { sendMailToPaciente } from "../config/nodemailer.js"
 import Paciente from "../models/Paciente.js"
+import generarJWT from "../helpers/crearJWT.js"
 
-const loginPaciente = (req,res)=>{
-    res.send("Login del paciente")
+const loginPaciente = async(req,res)=>{
+    const {email,password} = req.body
+
+    if (Object.values(req.body).includes("")) return res.status(404).json({msg:"Lo sentimos, debes llenar todos los campos"})
+
+    const pacienteBDD = await Paciente.findOne({email})
+    if(!pacienteBDD) return res.status(404).json({msg:"Lo sentimos, el usuario no se encuentra registrado"})
+
+    const verificarPassword = await pacienteBDD.matchPassword(password)
+    if(!verificarPassword) return res.status(404).json({msg:"Lo sentimos, el password no es el correcto"})
+
+    const token = generarJWT(pacienteBDD._id,"paciente")
+		const {nombre,propietario,email:emailP,celular,convencional,_id} = pacienteBDD
+    res.status(200).json({
+        token,
+        nombre,
+        propietario,
+        emailP,
+        celular,
+        convencional,
+        _id
+    })
 }
-const perfilPaciente = (req,res)=>{
-    res.send("Perfil del paciente")
+
+const perfilPaciente =(req,res)=>{
+    delete req.pacienteBDD.ingreso
+    delete req.pacienteBDD.sintomas
+    delete req.pacienteBDD.salida
+    delete req.pacienteBDD.estado
+    delete req.pacienteBDD.veterinario
+    delete req.pacienteBDD.createdAt
+    delete req.pacienteBDD.updatedAt
+    delete req.pacienteBDD.__v
+    res.status(200).json(req.pacienteBDD)
 }
 
 const listarPacientes = async (req,res)=>{
