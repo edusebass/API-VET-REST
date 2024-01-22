@@ -1,8 +1,11 @@
 import Tratamiento from "../models/Tratamiento.js"
 import mongoose from "mongoose";
 
-const detalleTratamiento = (req,res)=>{
-    res.send("Detalle del tratamiento")
+const detalleTratamiento = async(req,res)=>{
+    const {id} = req.params
+    if( !mongoose.Types.ObjectId.isValid(id) ) return res.status(404).json({msg:`Lo sentimos, no existe ese tratamiento`});
+    const tratamiento = await Tratamiento.findById(id).populate('paciente','_id nombre')
+    res.status(200).json(tratamiento)
 }
 
 const registrarTratamiento = async (req,res)=>{
