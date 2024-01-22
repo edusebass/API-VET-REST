@@ -1,3 +1,4 @@
+import mongoose from "mongoose"
 import { sendMailToPaciente } from "../config/nodemailer.js"
 import Paciente from "../models/Paciente.js"
 
@@ -17,8 +18,11 @@ const listarPacientes = async (req,res)=>{
 
 }
 
-const detallePaciente = (req,res)=>{
-    res.send("Detalle del paciente")
+const detallePaciente = async(req,res)=>{
+    const {id} = req.params
+    if( !mongoose.Types.ObjectId.isValid(id) ) return res.status(404).json({msg:`Lo sentimos, no existe el veterinario ${id}`});
+    const paciente = await Paciente.findById(id).select("-createdAt -updatedAt -__v").populate('veterinario','_id nombre apellido')
+    res.status(200).json(paciente)
 }
 
 const registrarPaciente = async(req,res)=>{
