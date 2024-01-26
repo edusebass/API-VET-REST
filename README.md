@@ -38,4 +38,3 @@ Agradecemos las contribuciones. Si deseas contribuir a este proyecto, sigue esto
 ## Licencia
 
 Este proyecto está bajo la Licencia [nombre de la licencia]. Consulta el archivo [LICENSE.md](LICENSE.md) para obtener más detalles.
-v
