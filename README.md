@@ -5,6 +5,7 @@ Esta API está diseñada para gestionar datos relacionados con un programa veter
 ## Configuración
 
 ### Variables de Entorno
+
 Asegúrate de configurar las siguientes variables de entorno antes de ejecutar la aplicación:
 
 - `MONGODB_URI`: La URL de conexión a la base de datos MongoDB.
@@ -27,17 +28,13 @@ Asegúrate de configurar las siguientes variables de entorno antes de ejecutar l
 ## Contribución
 
 Agradecemos las contribuciones. Si deseas contribuir a este proyecto, sigue estos pasos:
+
 1. Haz un fork del proyecto.
 2. Crea una nueva rama: `git checkout -b feature/nueva-funcionalidad`.
 3. Realiza tus cambios y haz commit: `git commit -m 'Agregar nueva funcionalidad'`.
 4. Haz push a la rama: `git push origin feature/nueva-funcionalidad`.
 5. Abre un pull request en GitHub.
 
-## Problemas Conocidos
-
-- [Descripción de problemas conocidos y posibles soluciones]
-
 ## Licencia
 
 Este proyecto está bajo la Licencia [nombre de la licencia]. Consulta el archivo [LICENSE.md](LICENSE.md) para obtener más detalles.
-v
